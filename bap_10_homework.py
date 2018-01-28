@@ -19,7 +19,7 @@ B = 12
 numShips = 10
 
 # Create a list of the ships
-Ships = range(1, numShips + 1)
+Ships = range(1,numShips+1)
 
 # Dictionaries containing ship information
 
@@ -85,15 +85,16 @@ prob = LpProblem("Berth Assignment", LpMinimize)
 # Build primary ship berthing relations variables
 
 # x variables model time relationships
-x = LpVariable.dicts("X", (Ships, Ships), cat=LpBinary)
+x = LpVariable.dicts("X", (Ships,Ships), cat=LpBinary)
 
 # y variables model space along berth relationships
-y = LpVariable.dicts("Y", (Ships, Ships), cat=LpBinary)
+y = LpVariable.dicts("Y", (Ships,Ships), cat=LpBinary)
+
 
 # Now the ship variables
-b = LpVariable.dicts("BerthPos", Ships, lowBound=1)
-t = LpVariable.dicts("BerthTime", Ships,  lowBound=1)
-c = LpVariable.dicts("CompleteTime", Ships, lowBound=1)
+b = LpVariable.dicts("BerthPos",Ships,lowBound=1)
+t = LpVariable.dicts("BerthTime",Ships,lowBound=1)
+c = LpVariable.dicts("CompleteTime",Ships,lowBound=1)
 
 # Objective function
 # The objective function is always added to 'prob' first in PuLP
@@ -101,9 +102,10 @@ prob += lpSum([c[s] for s in Ships]), "Total Completion Time"
 
 # Constraints
 # Relative position constraints in time
+
 for k in range(1,numShips):
-    for l in range(k+1,numShips+1):
-        prob += x[k][l] + x[l][k] <= 1, "ChooseRelTime(%d,%d)" % (k,l)
+    for l in range(k + 1, numShips + 1):
+        prob += x[k][l] + x[l][k] <= 1, "ChooseRelTime(%d,%d)" % (k, l)
 
 # Relative position constraints in space
 for k in range(1,numShips):
@@ -123,23 +125,15 @@ for k in range(1,numShips):
 #     for k in range (1, numShips):
 #         prob += b[l] >= b[k] + h[k] + M * (y[k][l] - 1)
 
-# # arrival constraints
-# for k in range(1, numShips):
-#     prob += t[k] >= a[k]
-
-
 for k in range(1, numShips):
     prob += b[k] >= 0
     prob += b[k] <= B - b[k]
 
-
 # Berthing time and space constraints
 for k in Ships:
     prob += t[k] >= a[k], "BerthTimeLowBound(%d)" % k
-# Add this yourself: make sure you define completion time I ADDED THIS
     prob += c[k] >= t[k] + p[k], "CompleteTimeDef(%d)" % k
     prob += b[k] <= B - h[k] + 1, "BerthPosBound(%d)" % k
-
 
 # Conflict prevention constraints
 for k in Ships:
