@@ -74,7 +74,7 @@ h = {1 : 5,
 # Big M
 # The statement below creates a bug.  Fix it, and decide
 # how "big" M needs to be.  Try to keep it not too big...
-M = 1000
+M = 100
 
 # Create the 'prob' object to contain the problem data
 # Note that "LpProblem" is used for LP, IP, or MIP
@@ -109,16 +109,15 @@ for k in range(1,numShips):
 
 # Relative position constraints in space
 for k in range(1,numShips):
-    for l in range(k+1,numShips+1):
+    for l in range(k + 1, numShips + 1):
         prob += y[k][l] + y[l][k] <= 1, "ChooseRelSpace(%d,%d)" % (k,l)
 
 # Overlap constraints
 # Add this yourself:  I deleted them...
 
 for k in range(1, numShips):
-    for l in range(1, numShips):
-        if k != l:
-            prob += x[k][l] + x[l][k] + y[k][l] + y[l][k] >= 1
+    for l in range(k + 1, numShips + 1):
+        prob += x[k][l] + x[l][k] + y[k][l] + y[l][k] >= 1
 
 # # #time overlaps
 # for l in range(1, numShips):
@@ -154,6 +153,7 @@ prob.writeLP("BAP.lp")
 
 # The problem is solved using PuLP's choice of Solver
 prob.solve(GUROBI())
+
 
 # The status of the solution is printed to the screen
 print "Status:", LpStatus[prob.status]
