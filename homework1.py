@@ -74,7 +74,7 @@ h = {1 : 5,
 # Big M
 # The statement below creates a bug.  Fix it, and decide
 # how "big" M needs to be.  Try to keep it not too big...
-M = 100
+M = 57
 
 # Create the 'prob' object to contain the problem data
 # Note that "LpProblem" is used for LP, IP, or MIP
@@ -95,10 +95,15 @@ y = LpVariable.dicts("Y", (Ships,Ships), cat=LpBinary)
 b = LpVariable.dicts("BerthPos",Ships,lowBound=1)
 t = LpVariable.dicts("BerthTime",Ships,lowBound=1)
 c = LpVariable.dicts("CompleteTime",Ships,lowBound=1)
+Z = LpVariable("Makespan", 1)
 
 # Objective function
 # The objective function is always added to 'prob' first in PuLP
-prob += lpSum([c[s] for s in Ships]), "Total Completion Time"
+# prob += lpSum([c[s] for s in Ships]), "Total Completion Time"
+prob += Z, "Min makespan"
+
+for k in range(1, numShips + 1):
+    prob += Z >= c[k]
 
 # Constraints
 # Relative position constraints in time
@@ -119,21 +124,7 @@ for k in range(1, numShips):
     for l in range(k + 1, numShips + 1):
         prob += x[k][l] + x[l][k] + y[k][l] + y[l][k] >= 1
 
-# # #time overlaps
-# for l in range(1, numShips):
-#     for k in range(1, numShips):
-#         if l != k:
-#             prob += t[l] >= c[k] + M * (x[k][l] - 1)
-# #
-# # #berth overlaps
-# for l in range(1, numShips):
-#     for k in range(1, numShips):
-#         if l != k:
-#             prob += b[l] >= b[k] + h[k] + M * (y[k][l] - 1)
-#
-# for k in range(1, numShips):
-#     prob += b[k] >= 0
-#     prob += b[k] <= B - b[k]
+
 
 # Berthing time and space constraints
 for k in Ships:
