@@ -19,7 +19,9 @@ B = 12
 numShips = 10
 
 # Create a list of the ships
-Ships = range(1,numShips+1)
+Ships = range(1, numShips+1)
+
+Importance = [1,2,3,4,5,6,7,8,9,10]
 
 # Dictionaries containing ship information
 
@@ -95,17 +97,23 @@ y = LpVariable.dicts("Y", (Ships,Ships), cat=LpBinary)
 b = LpVariable.dicts("BerthPos",Ships,lowBound=1)
 t = LpVariable.dicts("BerthTime",Ships,lowBound=1)
 c = LpVariable.dicts("CompleteTime",Ships,lowBound=1)
-w = LpVariable.dicts("Weights",Ships, lowBound=1)
-f = LpVariable.dicts("Importance",Ships, lowBound=1)
+w = LpVariable.dicts("penalty",Ships, lowBound=0)
+
+
 
 # Objective function
 # The objective function is always added to 'prob' first in PuLP
-prob += lpSum([c[s] + w[s] for s in Ships]), "Total Completion Time"
+prob += lpSum([c[s] + (Importance[s - 1] * w[s]) for s in Ships]), "Total Completion Time"
 
 # Constraints
-# Relative position constraints in time
 
-for k in range(1,numShips):
+
+# calculating the penalty
+for k in range(1, numShips + 1):
+    prob += w[k] >= c[k] - d[k]
+
+# Relative position constraints in time
+for k in range(1, numShips):
     for l in range(k + 1, numShips + 1):
         prob += x[k][l] + x[l][k] <= 1, "ChooseRelTime(%d,%d)" % (k, l)
 
