@@ -19,7 +19,7 @@ B = 12
 numShips = 10
 
 # Create a list of the ships
-Ships = range(1, numShips + 1)
+Ships = range(1,numShips+1)
 
 # Dictionaries containing ship information
 
@@ -74,7 +74,7 @@ h = {1 : 5,
 # Big M
 # The statement below creates a bug.  Fix it, and decide
 # how "big" M needs to be.  Try to keep it not too big...
-M = 57
+M = 100
 
 # Create the 'prob' object to contain the problem data
 # Note that "LpProblem" is used for LP, IP, or MIP
@@ -95,15 +95,12 @@ y = LpVariable.dicts("Y", (Ships,Ships), cat=LpBinary)
 b = LpVariable.dicts("BerthPos",Ships,lowBound=1)
 t = LpVariable.dicts("BerthTime",Ships,lowBound=1)
 c = LpVariable.dicts("CompleteTime",Ships,lowBound=1)
-Z = LpVariable("Makespan", 1)
+w = LpVariable.dicts("Weights",Ships, lowBound=1)
+f = LpVariable.dicts("Importance",Ships, lowBound=1)
 
 # Objective function
 # The objective function is always added to 'prob' first in PuLP
-# prob += lpSum([c[s] for s in Ships]), "Total Completion Time"
-prob += Z, "Min makespan"
-
-for k in range(1, numShips + 1):
-    prob += Z >= c[k]
+prob += lpSum([c[s] + w[s] for s in Ships]), "Total Completion Time"
 
 # Constraints
 # Relative position constraints in time
@@ -123,8 +120,6 @@ for k in range(1,numShips):
 for k in range(1, numShips):
     for l in range(k + 1, numShips + 1):
         prob += x[k][l] + x[l][k] + y[k][l] + y[l][k] >= 1
-
-
 
 # Berthing time and space constraints
 for k in Ships:
@@ -153,5 +148,5 @@ print "Status:", LpStatus[prob.status]
 for v in prob.variables():
     print v.name, "=", v.varValue
 
-# The optimised objective function value is printed to the screen
+# The optimised objective function value is printed to the screen    
 print "Total Completion Time = ", value(prob.objective)
