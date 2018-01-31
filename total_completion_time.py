@@ -10,6 +10,8 @@ Authors: Alan Erera 2012
 # Import PuLP modeler functions
 from pulp import *
 
+import operator
+
 # Data Section
 
 # Berth sections
@@ -96,6 +98,7 @@ b = LpVariable.dicts("BerthPos",Ships,lowBound=1)
 t = LpVariable.dicts("BerthTime",Ships,lowBound=1)
 c = LpVariable.dicts("CompleteTime",Ships,lowBound=1)
 
+
 # Objective function
 # The objective function is always added to 'prob' first in PuLP
 prob += lpSum([c[s] for s in Ships]), "Total Completion Time"
@@ -118,22 +121,6 @@ for k in range(1,numShips):
 for k in range(1, numShips):
     for l in range(k + 1, numShips + 1):
         prob += x[k][l] + x[l][k] + y[k][l] + y[l][k] >= 1
-
-# # #time overlaps
-# for l in range(1, numShips):
-#     for k in range(1, numShips):
-#         if l != k:
-#             prob += t[l] >= c[k] + M * (x[k][l] - 1)
-# #
-# # #berth overlaps
-# for l in range(1, numShips):
-#     for k in range(1, numShips):
-#         if l != k:
-#             prob += b[l] >= b[k] + h[k] + M * (y[k][l] - 1)
-#
-# for k in range(1, numShips):
-#     prob += b[k] >= 0
-#     prob += b[k] <= B - b[k]
 
 # Berthing time and space constraints
 for k in Ships:
@@ -164,3 +151,11 @@ for v in prob.variables():
 
 # The optimised objective function value is printed to the screen    
 print "Total Completion Time = ", value(prob.objective)
+
+makespan = 0
+
+for k in Ships:
+    if value(c[k]) >= makespan:
+        makespan = value(c[k])
+
+print "makespan = " + str(makespan)
