@@ -154,4 +154,11 @@ for v in prob.variables():
     print v.name, "=", v.varValue
 
 # The optimised objective function value is printed to the screen
-print "Total Completion Time = ", value(prob.objective)
+print "Makespan = ", value(prob.objective)
+
+tct = 0
+
+for k in Ships:
+    tct += value(c[k])
+
+print "my total completion time = ", str(tct)
