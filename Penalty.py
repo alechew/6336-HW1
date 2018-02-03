@@ -21,7 +21,7 @@ numShips = 10
 # Create a list of the ships
 Ships = range(1, numShips+1)
 
-Importance = [1,2,3,4,5,6,7,8,9,10]
+Importance = [1,2,3,4,5,6,7,16,9,10]
 
 # Dictionaries containing ship information
 
@@ -97,7 +97,7 @@ y = LpVariable.dicts("Y", (Ships,Ships), cat=LpBinary)
 b = LpVariable.dicts("BerthPos",Ships,lowBound=1)
 t = LpVariable.dicts("BerthTime",Ships,lowBound=1)
 c = LpVariable.dicts("CompleteTime",Ships,lowBound=1)
-w = LpVariable.dicts("penalty",Ships, lowBound=0)
+w = LpVariable.dicts("DelayTime",Ships, lowBound=0)
 
 
 
@@ -158,3 +158,12 @@ for v in prob.variables():
 
 # The optimised objective function value is printed to the screen    
 print "Total Completion Time = ", value(prob.objective)
+
+
+makespan = 0
+
+for k in Ships:
+    if value(c[k]) >= makespan:
+        makespan = value(c[k])
+
+print "makespan = " + str(makespan)
