@@ -9,19 +9,80 @@ Authors: Alan Erera 2013
 
 # Import PuLP modeler functions
 from pulp import *
+import MCNF_Objects
 
 # Data Section
 
 # Create a list of the nodes
 Nodes = ['A', 'B', 'C', 'D', 'E']
 
-# Dictionary of node demands
-b     = {    'A' : -60, 
-             'B' : 85, 
-             'C' : -5, 
-             'D' : -80,
-	     'E' : 60
-	 }
+# # Dictionary of node demands
+# b     = {    'A' : -60,
+#              'B' : 85,
+#              'C' : -5,
+#              'D' : -80,
+# 	     'E' : 60
+# 	 }
+portNames = ["New York", "Savannah", "Rotterdam", "Giao Tauro", "Dubai", "Singapore", "Shanghai", "Busan", "Seattle", "Los Angeles"]
+
+# net flow of empty containers. -flow means that the port is lacking empty containers to load and send.
+ports = {   "New York" : MCNF_Objects.Port("New York", 1220),
+			"Savannah" : MCNF_Objects.Port("Savannah", 2210),
+			"Rotterdam" : MCNF_Objects.Port("Rotterdam", 150),
+			"Giao Tauro" : MCNF_Objects.Port("Giao Tauro", 360),
+			"Dubai" : MCNF_Objects.Port("Dubai", 2025),
+			"Singapore" : MCNF_Objects.Port("Singapore", -1970),
+			"Shanghai" : MCNF_Objects.Port("Shanghai", -5040),
+			"Busan" : MCNF_Objects.Port("Busan", -1750),
+			"Seattle" : MCNF_Objects.Port("Seattle", 575),
+			"Los Angeles" : MCNF_Objects.Port("Los Angeles", 2220)
+		}
+
+
+
+# creating legs
+legs = [
+	MCNF_Objects.Leg(1, "Savannah", "New York", 3000, 2310, 690, 200),
+MCNF_Objects.Leg(1, "New York", "Rotterdam", 3000, 2450, 550, 400),
+MCNF_Objects.Leg(1, "Rotterdam", "Savannah", 3000, 2835, 165, 900),
+
+MCNF_Objects.Leg(2, "Rotterdam", "Giao Tauro", 3000, 1450, 1550, 250),
+MCNF_Objects.Leg(2, "Giao Tauro", "Dubai", 3000, 1560, 1440, 450),
+MCNF_Objects.Leg(2, "Dubai", "Giao Tauro", 3000, 2905, 95, 1000),
+MCNF_Objects.Leg(2, "Giao Tauro", "Rotterdam", 3000, 2435, 565, 600),
+
+
+MCNF_Objects.Leg(3, "Shanghai", "Singapore", 4000, 3950, 50, 800),
+MCNF_Objects.Leg(3, "Singapore", "Dubai", 4000, 3600, 400, 1100),
+MCNF_Objects.Leg(3, "Dubai", "Singapore", 4000, 900, 3100, 300),
+MCNF_Objects.Leg(3, "Singapore", "Shanghai", 4000, 1485, 2515, 300),
+
+MCNF_Objects.Leg(4, "Singapore", "Busan", 4400, 3295, 1105, 500),
+MCNF_Objects.Leg(4, "Busan", "Seattle", 4400, 4355, 45, 1100),
+MCNF_Objects.Leg(4, "Seattle", "Los Angeles", 4400, 3600, 800, 500),
+MCNF_Objects.Leg(4, "Los Angeles", "Singapore", 4400, 1750, 2650, 600),
+
+MCNF_Objects.Leg(5, "Shanghai", "Seattle", 3750, 3550, 200, 1300),
+MCNF_Objects.Leg(5, "Seattle", "Los Angeles", 3750, 3730, 20, 500),
+MCNF_Objects.Leg(5, "Los Angeles", "Shanghai", 3750, 3360, 390, 900),
+
+MCNF_Objects.Leg(6, "Singapore", "Busan", 2500, 2835, 165, 900),
+MCNF_Objects.Leg(6, "Busan", "Savannah", 2500, 2835, 165, 900),
+MCNF_Objects.Leg(6, "Savannah", "New York", 2500, 2835, 165, 900),
+MCNF_Objects.Leg(6, "New York", "Rotterdam", 2500, 2835, 165, 900),
+MCNF_Objects.Leg(6, "Rotterdam", "Dubai", 2500, 2835, 165, 900),
+MCNF_Objects.Leg(6, "Dubai", "Singapore", 2500, 2835, 165, 900),
+
+MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900),
+MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900),
+MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900),
+MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900)
+]
+
+
+# setting legs for each port
+ports.get("New York").inboundLegs =
+
 
 # Create arcs as list of duples
 Arcs =  (	('A','B') ,
