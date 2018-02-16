@@ -162,23 +162,29 @@ for out in output:
 #
 # # List of arc indices
 # indArcs = range(len(Arcs))
-#
-# # Create the 'prob' object to contain the problem data
-# prob = LpProblem("MinCost Network Flow", LpMinimize)
-#
-# # Decision variables
-# # Build arc flow variables for each arc, lower bounds = 0
-# arc_flow = []
+
+# Create the 'prob' object to contain the problem data
+prob = LpProblem("MinCost Network Flow", LpMinimize)
+
+# Decision variables
+# Build arc flow variables for each arc, lower bounds = 0
+arc_flow = []
 # for a in indArcs:
 #         # Format for LpVariable("Name",Lowerbound)
 # 	var = LpVariable("ArcFlow_(%s,%s)" % (str(Arcs[a][0]),str(Arcs[a][1])), 0)
 # 	arc_flow.append(var)
-#
-# # The objective function is added to 'prob' first
-# prob += lpSum([Cost[a]*arc_flow[a] for a in indArcs]), "Total Cost"
-#
-# # Generate a flow balance constraints for each node
-# # Option 1
+
+for leg in legs:
+    if isinstance(leg, MCNF_Objects.Leg):
+        var =  LpVariable("ArcFlow_(%s,%s)" % (leg.origin, leg.destination), 0, leg.emptyCap)
+        leg.arcFlow = var
+
+
+# The objective function is added to 'prob' first
+prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(legs)), "Total Cost"
+
+# Generate a flow balance constraints for each node
+# Option 1
 # for i in Nodes:
 # 	# One option:  build a set of outbound and inbound arcs for each node as needed
 # 	# Initialize empty lists of out and inArcs
@@ -187,9 +193,9 @@ for out in output:
 # 	for a in indArcs:
 # 		# Write code to check if the arc a goes into node i, or out of node i, and append node to the list
 # 	prob += lpSum([arc_flow[a] for a in outArcs]) - lpSum([arc_flow[a] for a in inArcs]) == b[i], "Node %s Balance" % str(i)
-#
-# # Option 2
-# # Create lists of out and inArcs for each node using a dictionary form
+
+# Option 2
+# Create lists of out and inArcs for each node using a dictionary form
 # outArcs = {}
 # inArcs = {}
 # for i in Nodes:
@@ -201,24 +207,32 @@ for out in output:
 # # Now use these lists in your constraint
 # for i in Nodes:
 # 	prob += lpSum([arc_flow[a] for a in outArcs[i]) - ...
-#
-#
+
+for portName in ports:
+    port = ports.get(portName)
+    if isinstance(port, MCNF_Objects.Port):
+
+
+
+
+
+
 # # Generate a flow upper bound for each arc
 # for a in indArcs:
 # 	prob += arc_flow[a] <= UpperBound[a], "Arc %s (%s,%s) Upper Bound" % (str(a),str(Arcs[a][0]),str(Arcs[a][1]))
-#
-# # Write out as a .LP file
-# prob.writeLP("MinCostFlow.lp")
-#
-# # The problem is solved using PuLP's choice of Solver
-# prob.solve(GUROBI())
-#
-# # The status of the solution is printed to the screen
-# print "Status:", LpStatus[prob.status]
-#
-# # Each of the variables is printed with it's resolved optimum value
-# for v in prob.variables():
-#     print v.name, "=", v.varValue
-#
-# # The optimised objective function value is printed to the screen
-# print "Total Cost = ", value(prob.objective)
+
+# Write out as a .LP file
+prob.writeLP("MinCostFlow.lp")
+
+# The problem is solved using PuLP's choice of Solver
+prob.solve(GUROBI())
+
+# The status of the solution is printed to the screen
+print "Status:", LpStatus[prob.status]
+
+# Each of the variables is printed with it's resolved optimum value
+for v in prob.variables():
+    print v.name, "=", v.varValue
+
+# The optimised objective function value is printed to the screen
+print "Total Cost = ", value(prob.objective)

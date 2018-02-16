@@ -7,6 +7,7 @@ class Leg:
         self.loadedAmount = loaded
         self.emptyCap = emptyCapacity
         self.cost = cost
+        self.arcFlow
 
 
 class Port:
