@@ -85,13 +85,13 @@ for thePort in portNames:
 	# adding inbound legs (legs that will arrive this port
 	inBoudList = []
 	for theLeg in legs:
-		if theLeg.destination == port.portName:
+		if theLeg.destination.__contains__(port.portName):
 			inBoudList.append(theLeg)
 
 	# adding outbound legs
 	outBoundList = []
 	for theLeg in legs:
-		if theLeg.origin == port.portName:
+		if theLeg.origin.__contains__(port.portName):
 			outBoundList.append(theLeg)
 
 	# setting outbound and inbound legs of the node.
@@ -102,7 +102,7 @@ for thePort in portNames:
 
 
 # Code to test that all ports have the correct legs
-output = ports["Seattle"].inboundLegs
+output = ports["New York"].inboundLegs
 for out in output:
 	if isinstance(out, MCNF_Objects.Leg):
 		print out.origin
@@ -168,20 +168,15 @@ prob = LpProblem("MinCost Network Flow", LpMinimize)
 
 # Decision variables
 # Build arc flow variables for each arc, lower bounds = 0
-arc_flow = []
-# for a in indArcs:
-#         # Format for LpVariable("Name",Lowerbound)
-# 	var = LpVariable("ArcFlow_(%s,%s)" % (str(Arcs[a][0]),str(Arcs[a][1])), 0)
-# 	arc_flow.append(var)
 
 for leg in legs:
-    if isinstance(leg, MCNF_Objects.Leg):
-        var =  LpVariable("ArcFlow_(%s,%s)" % (leg.origin, leg.destination), 0, leg.emptyCap)
-        leg.arcFlow = var
+	if isinstance(leg, MCNF_Objects.Leg):
+		var = LpVariable("ArcFlow_(%s,%s)" % (leg.origin, leg.destination), 0, leg.emptyCap)
+		leg.arcFlow = var
 
 
 # The objective function is added to 'prob' first
-prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(legs)), "Total Cost"
+prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(len(legs))), "Total Cost"
 
 # Generate a flow balance constraints for each node
 # Option 1
@@ -209,9 +204,18 @@ prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(legs)), "Total Cost"
 # 	prob += lpSum([arc_flow[a] for a in outArcs[i]) - ...
 
 for portName in ports:
-    port = ports.get(portName)
-    if isinstance(port, MCNF_Objects.Port):
-
+	port = ports.get(portName)
+	if isinstance(port, MCNF_Objects.Port):
+		totalInbound = 0
+		totalOutbound = 0
+		for inbound in port.inboundLegs:
+			if isinstance(inbound, MCNF_Objects.Leg):
+				totalInbound += inbound.arcFlow
+		for outbound in port.outboundLegs:
+			if isinstance(outbound, MCNF_Objects.Leg):
+				totalOutbound += outbound.arcFlow
+	# adding the constraint
+	prob += lpSum(leg.arcFlow for leg in port.inboundLegs) - lpSum(leg.arcFlow for leg in port.outboundLegs) == port.demand, "Port of %s Balance" % port.portName
 
 
 
