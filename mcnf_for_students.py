@@ -215,7 +215,7 @@ for portName in ports:
 			if isinstance(outbound, MCNF_Objects.Leg):
 				totalOutbound += outbound.arcFlow
 	# adding the constraint
-	prob += lpSum(leg.arcFlow for leg in port.inboundLegs) - lpSum(leg.arcFlow for leg in port.outboundLegs) == port.demand, "Port of %s Balance" % port.portName
+	prob += lpSum(leg.arcFlow for leg in port.outboundLegs) - lpSum(leg.arcFlow for leg in port.inboundLegs) == port.demand, "Port of %s Balance" % port.portName
 
 
 
