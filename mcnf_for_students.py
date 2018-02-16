@@ -38,11 +38,9 @@ ports = {   "New York" : MCNF_Objects.Port("New York", 1220),
 			"Los Angeles" : MCNF_Objects.Port("Los Angeles", 2220)
 		}
 
-
-
 # creating legs
 legs = [
-	MCNF_Objects.Leg(1, "Savannah", "New York", 3000, 2310, 690, 200),
+MCNF_Objects.Leg(1, "Savannah", "New York", 3000, 2310, 690, 200),
 MCNF_Objects.Leg(1, "New York", "Rotterdam", 3000, 2450, 550, 400),
 MCNF_Objects.Leg(1, "Rotterdam", "Savannah", 3000, 2835, 165, 900),
 
@@ -79,9 +77,26 @@ MCNF_Objects.Leg(7, "New York", "Savannah", 2900, 80, 2820, 200),
 MCNF_Objects.Leg(7, "Savannah", "Shanghai", 2900, 495, 2405, 600)
 ]
 
-
 # setting legs for each port
-ports.get("New York").inboundLegs =
+for thePort in portNames:
+	# finds the port(node) and then we use this reference to set inbound and outbound legs
+	port = ports.get(thePort)
+
+	#adding inbound legs (legs that will arrive this port
+	inBoudList = []
+	for theLeg in legs:
+		if theLeg.destination == port.portName:
+			inBoudList.add(theLeg)
+
+	# adding outbound legs
+	outBoundList = []
+	for theLeg in legs:
+		if theLeg.origin == port.portName:
+			outBoundList.add(theLeg)
+
+	#setting outbound and inbound legs of the node.
+	port.inboundLegs = inBoudList
+	port.outboundLegs = outBoundList
 
 
 # Create arcs as list of duples
