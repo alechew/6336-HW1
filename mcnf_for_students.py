@@ -66,17 +66,17 @@ MCNF_Objects.Leg(5, "Shanghai", "Seattle", 3750, 3550, 200, 1300),
 MCNF_Objects.Leg(5, "Seattle", "Los Angeles", 3750, 3730, 20, 500),
 MCNF_Objects.Leg(5, "Los Angeles", "Shanghai", 3750, 3360, 390, 900),
 
-MCNF_Objects.Leg(6, "Singapore", "Busan", 2500, 2835, 165, 900),
-MCNF_Objects.Leg(6, "Busan", "Savannah", 2500, 2835, 165, 900),
-MCNF_Objects.Leg(6, "Savannah", "New York", 2500, 2835, 165, 900),
-MCNF_Objects.Leg(6, "New York", "Rotterdam", 2500, 2835, 165, 900),
-MCNF_Objects.Leg(6, "Rotterdam", "Dubai", 2500, 2835, 165, 900),
-MCNF_Objects.Leg(6, "Dubai", "Singapore", 2500, 2835, 165, 900),
+MCNF_Objects.Leg(6, "Singapore", "Busan", 2500, 1510, 990, 500),
+MCNF_Objects.Leg(6, "Busan", "Savannah", 2500, 2200, 300, 1400),
+MCNF_Objects.Leg(6, "Savannah", "New York", 2500, 1300, 1200, 300),
+MCNF_Objects.Leg(6, "New York", "Rotterdam", 2500, 1540, 960, 400),
+MCNF_Objects.Leg(6, "Rotterdam", "Dubai", 2500, 1990, 510, 500),
+MCNF_Objects.Leg(6, "Dubai", "Singapore", 2500, 1320, 1180, 800),
 
-MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900),
-MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900),
-MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900),
-MCNF_Objects.Leg(7, "Rotterdam", "Savannah", 2900, 2835, 165, 900)
+MCNF_Objects.Leg(7, "Shanghai", "Savannah", 2900, 2880, 20, 1500),
+MCNF_Objects.Leg(7, "Savannah", "New York", 2900, 1680, 1220, 300),
+MCNF_Objects.Leg(7, "New York", "Savannah", 2900, 80, 2820, 200),
+MCNF_Objects.Leg(7, "Savannah", "Shanghai", 2900, 495, 2405, 600)
 ]
 
 
