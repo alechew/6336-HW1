@@ -80,6 +80,13 @@ legs = [
 	MCNF_Objects_hw3.Leg(6, 6, 3, 1, 0),
 	MCNF_Objects_hw3.Leg(6, 6, 4, 1, 0),
 	MCNF_Objects_hw3.Leg(6, 6, 5, 1, 0),
+
+	# adding source arcs
+	MCNF_Objects_hw3.Leg(0, 1, 0, 1, 0),
+	MCNF_Objects_hw3.Leg(0, 2, 0, 1, 0),
+	MCNF_Objects_hw3.Leg(0, 3, 0, 1, 0),
+	MCNF_Objects_hw3.Leg(0, 4, 0, 1, 0),
+	MCNF_Objects_hw3.Leg(0, 5, 0, 1, 0)
 ]
 
 # setting legs for each port
