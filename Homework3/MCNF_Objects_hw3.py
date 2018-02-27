@@ -5,7 +5,7 @@ class Leg:
         self.destination = dest
         self.end = startTime + daysTraveled
         if self.end >= 6:
-            self.destination = 7
+            self.destination = "7" + "_" + str(dest)
         self.cost = cost
         self.arcFlow = 0
 
