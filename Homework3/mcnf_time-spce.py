@@ -11,7 +11,7 @@ Authors: Alan Erera 2013
 from pulp import *
 import MCNF_Objects_hw3
 
-terminalNames = [1, 2, 3, 4, 5, 6]
+terminalNames = [0, 1, 2, 3, 4, 5, 6, 7]
 
 #  0 is source and 7 is sink
 # name, time, net supplies
@@ -44,9 +44,7 @@ legs = [
 	MCNF_Objects_hw3.Leg(3, 5, 4, 2, 1),
 	MCNF_Objects_hw3.Leg(4, 2, 5, 1, 1),
 	MCNF_Objects_hw3.Leg(4, 5, 5, 2, 1),
-
-	# inventory arcs
-	MCNF_Objects_hw3.Leg(1, 1, 1, 1, 1),
+	MCNF_Objects_hw3.Leg(1, 1, 1, 1, 1),# inventory arcs
 	MCNF_Objects_hw3.Leg(1, 1, 2, 1, 1),
 	MCNF_Objects_hw3.Leg(1, 1, 3, 1, 1),
 	MCNF_Objects_hw3.Leg(1, 1, 4, 1, 1),
@@ -76,16 +74,13 @@ legs = [
 	MCNF_Objects_hw3.Leg(6, 6, 3, 1, 1),
 	MCNF_Objects_hw3.Leg(6, 6, 4, 1, 1),
 	MCNF_Objects_hw3.Leg(6, 6, 5, 1, 1),		# this are the inventory arcs that goes to sink
-
-	# adding source arc
-	MCNF_Objects_hw3.Leg(0, 1, 0, 1, 1),
+	MCNF_Objects_hw3.Leg(0, 1, 0, 1, 1),		# source - terminal arcs
 	MCNF_Objects_hw3.Leg(0, 2, 0, 1, 1),
 	MCNF_Objects_hw3.Leg(0, 3, 0, 1, 1),
 	MCNF_Objects_hw3.Leg(0, 4, 0, 1, 1),
 	MCNF_Objects_hw3.Leg(0, 5, 0, 1, 1),
-
-	#adding drain
-	MCNF_Objects_hw3.Leg(0, 7, 0, 6, 0)
+	MCNF_Objects_hw3.Leg(0, 6, 0, 1, 1),
+	MCNF_Objects_hw3.Leg(0, 7, 0, 6, 0) 		# drain
 ]
 
 # setting legs for each port
@@ -135,7 +130,8 @@ prob = LpProblem("MinCost Network Flow", LpMinimize)
 
 for leg in legs:
 	if isinstance(leg, MCNF_Objects_hw3.Leg):
-		var = LpVariable("ArcFlow_(%s,%s)" % (leg.origin + "_" + leg.start, leg.destination + "_" + leg.end), 0)
+		letMeSeeLEg = leg
+		var = LpVariable("ArcFlow_(%s,%s)" % (str(leg.origin) + "_" + str(leg.start), str(leg.destination) + "_" + str(leg.end)), 0)
 		leg.arcFlow = var
 
 
@@ -158,7 +154,7 @@ for portName in terminalNames:
 			if isinstance(outbound, MCNF_Objects_hw3.Leg):
 				totalOutbound += outbound.arcFlow
 				# adding the constraint
-		prob += lpSum(leg.arcFlow for leg in currentTerminal.outboundLegs) - lpSum(leg.arcFlow for leg in currentTerminal.inboundLegs) == currentTerminal.supply, "Port of %s Balance" % currentTerminal.portName
+		prob += lpSum(leg.arcFlow for leg in currentTerminal.outboundLegs) - lpSum(leg.arcFlow for leg in currentTerminal.inboundLegs) == currentTerminal.supply, "Terminal %s Balance" % (str(currentTerminal.portName) + "_" + str(currentTerminal.time))
 
 # Write out as a .LP file
 prob.writeLP("MinCostFlow.lp")
