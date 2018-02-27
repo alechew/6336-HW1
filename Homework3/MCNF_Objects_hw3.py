@@ -9,9 +9,9 @@ class Leg:
 
 
 class City:
-    def __init__(self, name, time, demand):
+    def __init__(self, name, time, netsupply):
         self.portName = name
         self.time = time
-        self.demand = demand
+        self.supply = netsupply
         self.outboundLegs = []
         self.inboundLegs = []

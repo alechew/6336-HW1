@@ -14,15 +14,16 @@ import MCNF_Objects_hw3
 terminalNames = [1, 2, 3, 4, 5, 6]
 
 #  0 is source and 7 is sink
-# name, time, cost
+# name, time, net supplies
 terminals = {
-	1 : [MCNF_Objects_hw3.City(1, 1, 0), MCNF_Objects_hw3.City(1, 2, 0), MCNF_Objects_hw3.City(1, 3, 0), MCNF_Objects_hw3.City(1, 4, 0), MCNF_Objects_hw3.City(1, 5, 0)],
-	2 : [MCNF_Objects_hw3.City(2, 1, 0), MCNF_Objects_hw3.City(2, 2, 0), MCNF_Objects_hw3.City(2, 3, 0), MCNF_Objects_hw3.City(2, 4, 0), MCNF_Objects_hw3.City(2, 5, 0)],
-	3 : [MCNF_Objects_hw3.City(3, 1, 0), MCNF_Objects_hw3.City(3, 2, 0), MCNF_Objects_hw3.City(3, 3, 0), MCNF_Objects_hw3.City(3, 4, 0), MCNF_Objects_hw3.City(3, 5, 0)],
-	4 : [MCNF_Objects_hw3.City(4, 1, 0), MCNF_Objects_hw3.City(4, 2, 0), MCNF_Objects_hw3.City(4, 3, 0), MCNF_Objects_hw3.City(4, 4, 0), MCNF_Objects_hw3.City(4, 5, 0)],
-	5 : [MCNF_Objects_hw3.City(5, 1, 0), MCNF_Objects_hw3.City(5, 2, 0), MCNF_Objects_hw3.City(5, 3, 0), MCNF_Objects_hw3.City(5, 4, 0), MCNF_Objects_hw3.City(5, 5, 0)],
-	6 : [MCNF_Objects_hw3.City(6, 1, 0), MCNF_Objects_hw3.City(6, 2, 0), MCNF_Objects_hw3.City(6, 3, 0), MCNF_Objects_hw3.City(6, 4, 0), MCNF_Objects_hw3.City(6, 5, 0)],
-	7 : [MCNF_Objects_hw3.City(7, 6, 0)],
+	0 : [MCNF_Objects_hw3.City(0, 0, 0)],
+	1 : [MCNF_Objects_hw3.City(1, 1, -3), MCNF_Objects_hw3.City(1, 2, -1), MCNF_Objects_hw3.City(1, 3, 0), MCNF_Objects_hw3.City(1, 4, 0), MCNF_Objects_hw3.City(1, 5, 0)],
+	2 : [MCNF_Objects_hw3.City(2, 1, 0), MCNF_Objects_hw3.City(2, 2, 0), MCNF_Objects_hw3.City(2, 3, 0), MCNF_Objects_hw3.City(2, 4, -3), MCNF_Objects_hw3.City(2, 5, 0)],
+	3 : [MCNF_Objects_hw3.City(3, 1, 0), MCNF_Objects_hw3.City(3, 2, 0), MCNF_Objects_hw3.City(3, 3, -8), MCNF_Objects_hw3.City(3, 4, -3), MCNF_Objects_hw3.City(3, 5, 3)],
+	4 : [MCNF_Objects_hw3.City(4, 1, 0), MCNF_Objects_hw3.City(4, 2, -2), MCNF_Objects_hw3.City(4, 3, 0), MCNF_Objects_hw3.City(4, 4, 0), MCNF_Objects_hw3.City(4, 5, -1)],
+	5 : [MCNF_Objects_hw3.City(5, 1, -1), MCNF_Objects_hw3.City(5, 2, 0), MCNF_Objects_hw3.City(5, 3, -4), MCNF_Objects_hw3.City(5, 4, 0), MCNF_Objects_hw3.City(5, 5, 4)],
+	6 : [MCNF_Objects_hw3.City(6, 1, -2), MCNF_Objects_hw3.City(6, 2, 0), MCNF_Objects_hw3.City(6, 3, 0), MCNF_Objects_hw3.City(6, 4, 4), MCNF_Objects_hw3.City(6, 5, 2)],
+	7 : [MCNF_Objects_hw3.City(7, 6, 0)]
 		}
 
 # creating legs
@@ -49,37 +50,37 @@ legs = [
 	MCNF_Objects_hw3.Leg(1, 1, 2, 1, 0),
 	MCNF_Objects_hw3.Leg(1, 1, 3, 1, 0),
 	MCNF_Objects_hw3.Leg(1, 1, 4, 1, 0),
-	MCNF_Objects_hw3.Leg(1, 1, 5, 1, 0),
+	MCNF_Objects_hw3.Leg(1, 1, 5, 1, 0),		# this are the inventory arcs that goes to sink
 
 	MCNF_Objects_hw3.Leg(2, 2, 1, 1, 0),
 	MCNF_Objects_hw3.Leg(2, 2, 2, 1, 0),
 	MCNF_Objects_hw3.Leg(2, 2, 3, 1, 0),
 	MCNF_Objects_hw3.Leg(2, 2, 4, 1, 0),
-	MCNF_Objects_hw3.Leg(2, 2, 5, 1, 0),
+	MCNF_Objects_hw3.Leg(2, 2, 5, 1, 0),		# this are the inventory arcs that goes to sink
 
 	MCNF_Objects_hw3.Leg(3, 3, 1, 1, 0),
 	MCNF_Objects_hw3.Leg(3, 3, 2, 1, 0),
 	MCNF_Objects_hw3.Leg(3, 3, 3, 1, 0),
 	MCNF_Objects_hw3.Leg(3, 3, 4, 1, 0),
-	MCNF_Objects_hw3.Leg(3, 3, 5, 1, 0),
+	MCNF_Objects_hw3.Leg(3, 3, 5, 1, 0),		# this are the inventory arcs that goes to sink
 
 	MCNF_Objects_hw3.Leg(4, 4, 1, 1, 0),
 	MCNF_Objects_hw3.Leg(4, 4, 2, 1, 0),
 	MCNF_Objects_hw3.Leg(4, 4, 3, 1, 0),
 	MCNF_Objects_hw3.Leg(4, 4, 4, 1, 0),
-	MCNF_Objects_hw3.Leg(4, 4, 5, 1, 0),
+	MCNF_Objects_hw3.Leg(4, 4, 5, 1, 0),		# this are the inventory arcs that goes to sink
 
 	MCNF_Objects_hw3.Leg(5, 5, 1, 1, 0),
 	MCNF_Objects_hw3.Leg(5, 5, 2, 1, 0),
 	MCNF_Objects_hw3.Leg(5, 5, 3, 1, 0),
 	MCNF_Objects_hw3.Leg(5, 5, 4, 1, 0),
-	MCNF_Objects_hw3.Leg(5, 5, 5, 1, 0),
+	MCNF_Objects_hw3.Leg(5, 5, 5, 1, 0),		# this are the inventory arcs that goes to sink
 
 	MCNF_Objects_hw3.Leg(6, 6, 1, 1, 0),
 	MCNF_Objects_hw3.Leg(6, 6, 2, 1, 0),
 	MCNF_Objects_hw3.Leg(6, 6, 3, 1, 0),
 	MCNF_Objects_hw3.Leg(6, 6, 4, 1, 0),
-	MCNF_Objects_hw3.Leg(6, 6, 5, 1, 0),
+	MCNF_Objects_hw3.Leg(6, 6, 5, 1, 0),		# this are the inventory arcs that goes to sink
 
 	# adding source arcs
 	MCNF_Objects_hw3.Leg(0, 1, 0, 1, 0),
@@ -87,6 +88,7 @@ legs = [
 	MCNF_Objects_hw3.Leg(0, 3, 0, 1, 0),
 	MCNF_Objects_hw3.Leg(0, 4, 0, 1, 0),
 	MCNF_Objects_hw3.Leg(0, 5, 0, 1, 0)
+
 ]
 
 # setting legs for each port
@@ -136,7 +138,7 @@ prob = LpProblem("MinCost Network Flow", LpMinimize)
 
 for leg in legs:
 	if isinstance(leg, MCNF_Objects_hw3.Leg):
-		var = LpVariable("ArcFlow_(%s,%s)" % (leg.origin, leg.destination), 0, leg.emptyCap)
+		var = LpVariable("ArcFlow_(%s,%s)" % (leg.origin, leg.destination),0)
 		leg.arcFlow = var
 
 
