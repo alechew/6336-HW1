@@ -1,9 +1,11 @@
 class Leg:
     def __init__(self, org, dest, startTime, daysTraveled, cost):
         self.origin = org
-        self.destination = dest
         self.start = startTime
+        self.destination = dest
         self.end = startTime + daysTraveled
+        if self.end >= 6:
+            self.destination = 7
         self.cost = cost
         self.arcFlow = 0
 

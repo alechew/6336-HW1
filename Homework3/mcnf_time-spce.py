@@ -135,7 +135,7 @@ prob = LpProblem("MinCost Network Flow", LpMinimize)
 
 for leg in legs:
 	if isinstance(leg, MCNF_Objects_hw3.Leg):
-		var = LpVariable("ArcFlow_(%s,%s)" % (leg.origin, leg.destination),0)
+		var = LpVariable("ArcFlow_(%s,%s)" % (leg.origin + "_" + leg.start, leg.destination + "_" + leg.end), 0)
 		leg.arcFlow = var
 
 
