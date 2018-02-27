@@ -11,11 +11,11 @@ Authors: Alan Erera 2013
 from pulp import *
 import MCNF_Objects_hw3
 
-portNames = ["New York", "Savannah", "Rotterdam", "Giao Tauro", "Dubai", "Singapore", "Shanghai", "Busan", "Seattle", "Los Angeles"]
+terminalNames = [1, 2, 3, 4, 5, 6]
 
 #  0 is source and 6 is sink
 # name, time, cost
-ports = {
+terminals = {
 	1 : [MCNF_Objects_hw3.City(1, 0, 0), MCNF_Objects_hw3.City(1, 1, 0), MCNF_Objects_hw3.City(1, 2, 0), MCNF_Objects_hw3.City(1, 3, 0), MCNF_Objects_hw3.City(1, 4, 0), MCNF_Objects_hw3.City(1, 5, 0), MCNF_Objects_hw3.City(1, 6, 0)],
 	2 : [MCNF_Objects_hw3.City(2, 0, 0), MCNF_Objects_hw3.City(2, 1, 0), MCNF_Objects_hw3.City(2, 2, 0), MCNF_Objects_hw3.City(2, 3, 0), MCNF_Objects_hw3.City(2, 4, 0), MCNF_Objects_hw3.City(2, 5, 0), MCNF_Objects_hw3.City(2, 6, 0)],
 	3 : [MCNF_Objects_hw3.City(3, 0, 0), MCNF_Objects_hw3.City(3, 1, 0), MCNF_Objects_hw3.City(3, 2, 0), MCNF_Objects_hw3.City(3, 3, 0), MCNF_Objects_hw3.City(3, 4, 0), MCNF_Objects_hw3.City(3, 5, 0), MCNF_Objects_hw3.City(3, 6, 0)],
@@ -45,29 +45,34 @@ legs = [
 ]
 
 # setting legs for each port
-for thePort in portNames:
-	# finds the port(node) and then we use this reference to set inbound and outbound legs
-	port = ports.get(thePort)
+for theTerminal in terminalNames:
+	# finds the terminal(node) and then we use this reference
+	# to set inbound and outbound legs for the specified time period
+	terminal = terminals.get(theTerminal)
 
-	# adding inbound legs (legs that will arrive this port
-	inBoudList = []
-	for theLeg in legs:
-		if theLeg.destination.__contains__(port.portName):
-			inBoudList.append(theLeg)
-
-	# adding outbound legs
+	inBoundList = []
 	outBoundList = []
-	for theLeg in legs:
-		if theLeg.origin.__contains__(port.portName):
-			outBoundList.append(theLeg)
+	for x in range(len(terminal)):
+		# adding inbound legs (legs that will arrive this terminal
+		terminalAndTime = terminal[x]
+		for theLeg in legs:
+			if isinstance(terminalAndTime, MCNF_Objects_hw3.City):
+				if theLeg.destination == terminalAndTime.portName & theLeg.end == terminalAndTime.time:
+					inBoundList.append(theLeg)
 
-	# setting outbound and inbound legs of the node.
-	port.inboundLegs = inBoudList
-	port.outboundLegs = outBoundList
+		# adding outbound legs
+		for theLeg in legs:
+			if isinstance(terminalAndTime, MCNF_Objects_hw3.City):
+				if theLeg.origin == terminalAndTime.portName & theLeg.start == terminalAndTime.time:
+					outBoundList.append(theLeg)
+
+		# setting outbound and inbound legs of the node.
+		terminalAndTime.inboundLegs = inBoundList
+		terminalAndTime.outboundLegs = outBoundList
 
 
 # Code to test that all ports have the correct legs
-output = ports["New York"].inboundLegs
+output = terminals["New York"].inboundLegs
 for out in output:
 	if isinstance(out, MCNF_Objects_hw3.Leg):
 		print out.origin
@@ -89,19 +94,19 @@ for leg in legs:
 prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(len(legs))), "Total Cost"
 
 
-for portName in ports:
-	port = ports.get(portName)
-	if isinstance(port, MCNF_Objects_hw3.City):
+for portName in terminals:
+	terminal = terminals.get(portName)
+	if isinstance(terminal, MCNF_Objects_hw3.City):
 		totalInbound = 0
 		totalOutbound = 0
-		for inbound in port.inboundLegs:
+		for inbound in terminal.inboundLegs:
 			if isinstance(inbound, MCNF_Objects_hw3.Leg):
 				totalInbound += inbound.arcFlow
-		for outbound in port.outboundLegs:
+		for outbound in terminal.outboundLegs:
 			if isinstance(outbound, MCNF_Objects_hw3.Leg):
 				totalOutbound += outbound.arcFlow
 	# adding the constraint
-	prob += lpSum(leg.arcFlow for leg in port.outboundLegs) - lpSum(leg.arcFlow for leg in port.inboundLegs) == port.demand, "Port of %s Balance" % port.portName
+	prob += lpSum(leg.arcFlow for leg in terminal.outboundLegs) - lpSum(leg.arcFlow for leg in terminal.inboundLegs) == terminal.demand, "Port of %s Balance" % terminal.portName
 
 # Write out as a .LP file
 prob.writeLP("MinCostFlow.lp")
