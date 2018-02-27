@@ -16,32 +16,32 @@ terminalNames = [1, 2, 3, 4, 5, 6]
 #  0 is source and 6 is sink
 # name, time, cost
 terminals = {
-	1 : [MCNF_Objects_hw3.City(1, 0, 0), MCNF_Objects_hw3.City(1, 1, 0), MCNF_Objects_hw3.City(1, 2, 0), MCNF_Objects_hw3.City(1, 3, 0), MCNF_Objects_hw3.City(1, 4, 0), MCNF_Objects_hw3.City(1, 5, 0), MCNF_Objects_hw3.City(1, 6, 0)],
-	2 : [MCNF_Objects_hw3.City(2, 0, 0), MCNF_Objects_hw3.City(2, 1, 0), MCNF_Objects_hw3.City(2, 2, 0), MCNF_Objects_hw3.City(2, 3, 0), MCNF_Objects_hw3.City(2, 4, 0), MCNF_Objects_hw3.City(2, 5, 0), MCNF_Objects_hw3.City(2, 6, 0)],
-	3 : [MCNF_Objects_hw3.City(3, 0, 0), MCNF_Objects_hw3.City(3, 1, 0), MCNF_Objects_hw3.City(3, 2, 0), MCNF_Objects_hw3.City(3, 3, 0), MCNF_Objects_hw3.City(3, 4, 0), MCNF_Objects_hw3.City(3, 5, 0), MCNF_Objects_hw3.City(3, 6, 0)],
-	4 : [MCNF_Objects_hw3.City(4, 0, 0), MCNF_Objects_hw3.City(4, 1, 0), MCNF_Objects_hw3.City(4, 2, 0), MCNF_Objects_hw3.City(4, 3, 0), MCNF_Objects_hw3.City(4, 4, 0), MCNF_Objects_hw3.City(4, 5, 0), MCNF_Objects_hw3.City(4, 6, 0)],
-	5 : [MCNF_Objects_hw3.City(5, 0, 0), MCNF_Objects_hw3.City(5, 1, 0), MCNF_Objects_hw3.City(5, 2, 0), MCNF_Objects_hw3.City(5, 3, 0), MCNF_Objects_hw3.City(5, 4, 0), MCNF_Objects_hw3.City(5, 5, 0), MCNF_Objects_hw3.City(5, 6, 0)],
-	6 : [MCNF_Objects_hw3.City(6, 0, 0), MCNF_Objects_hw3.City(6, 1, 0), MCNF_Objects_hw3.City(6, 2, 0), MCNF_Objects_hw3.City(6, 3, 0), MCNF_Objects_hw3.City(6, 4, 0), MCNF_Objects_hw3.City(6, 5, 0), MCNF_Objects_hw3.City(6, 6, 0)]
+	1 : [MCNF_Objects_hw3.City(1, 1, 0), MCNF_Objects_hw3.City(1, 2, 0), MCNF_Objects_hw3.City(1, 3, 0), MCNF_Objects_hw3.City(1, 4, 0), MCNF_Objects_hw3.City(1, 5, 0)],
+	2 : [MCNF_Objects_hw3.City(2, 1, 0), MCNF_Objects_hw3.City(2, 2, 0), MCNF_Objects_hw3.City(2, 3, 0), MCNF_Objects_hw3.City(2, 4, 0), MCNF_Objects_hw3.City(2, 5, 0)],
+	3 : [MCNF_Objects_hw3.City(3, 1, 0), MCNF_Objects_hw3.City(3, 2, 0), MCNF_Objects_hw3.City(3, 3, 0), MCNF_Objects_hw3.City(3, 4, 0), MCNF_Objects_hw3.City(3, 5, 0)],
+	4 : [MCNF_Objects_hw3.City(4, 1, 0), MCNF_Objects_hw3.City(4, 2, 0), MCNF_Objects_hw3.City(4, 3, 0), MCNF_Objects_hw3.City(4, 4, 0), MCNF_Objects_hw3.City(4, 5, 0)],
+	5 : [MCNF_Objects_hw3.City(5, 1, 0), MCNF_Objects_hw3.City(5, 2, 0), MCNF_Objects_hw3.City(5, 3, 0), MCNF_Objects_hw3.City(5, 4, 0), MCNF_Objects_hw3.City(5, 5, 0)],
+	6 : [MCNF_Objects_hw3.City(6, 1, 0), MCNF_Objects_hw3.City(6, 2, 0), MCNF_Objects_hw3.City(6, 3, 0), MCNF_Objects_hw3.City(6, 4, 0), MCNF_Objects_hw3.City(6, 5, 0)]
 		}
 
 # creating legs
-# Origin, Destination, StartTime, EndTime.  EndTime will be 6 for those that are not in planning horizon.
+# Origin, Destination, StartTime, duration, cost.  EndTime will be 6 for those that are not in planning horizon.
 legs = [
-	MCNF_Objects_hw3.Leg(1, 4, 1, 1),
-	MCNF_Objects_hw3.Leg(6, 5, 1, 1),
-	MCNF_Objects_hw3.Leg(5, 1, 1, 3),
-	MCNF_Objects_hw3.Leg(1, 5, 2, 3),
-	MCNF_Objects_hw3.Leg(4, 3, 2, 3),
-	MCNF_Objects_hw3.Leg(4, 5, 2, 2),
-	MCNF_Objects_hw3.Leg(3, 4, 3, 3),
-	MCNF_Objects_hw3.Leg(5, 6, 3, 1),
-	MCNF_Objects_hw3.Leg(3, 5, 3, 2),
-	MCNF_Objects_hw3.Leg(1, 6, 4, 3),
-	MCNF_Objects_hw3.Leg(2, 4, 4, 1),
-	MCNF_Objects_hw3.Leg(5, 6, 4, 1),
-	MCNF_Objects_hw3.Leg(3, 5, 4, 2),
-	MCNF_Objects_hw3.Leg(4, 2, 5, 1),
-	MCNF_Objects_hw3.Leg(4, 5, 5, 2),
+	MCNF_Objects_hw3.Leg(1, 4, 1, 1, 0),
+	MCNF_Objects_hw3.Leg(6, 5, 1, 1, 0),
+	MCNF_Objects_hw3.Leg(5, 1, 1, 3, 0),
+	MCNF_Objects_hw3.Leg(1, 5, 2, 3, 0),
+	MCNF_Objects_hw3.Leg(4, 3, 2, 3, 0),
+	MCNF_Objects_hw3.Leg(4, 5, 2, 2, 0),
+	MCNF_Objects_hw3.Leg(3, 4, 3, 3, 0),
+	MCNF_Objects_hw3.Leg(5, 6, 3, 1, 0),
+	MCNF_Objects_hw3.Leg(3, 5, 3, 2, 0),
+	MCNF_Objects_hw3.Leg(1, 6, 4, 3, 0),
+	MCNF_Objects_hw3.Leg(2, 4, 4, 1, 0),
+	MCNF_Objects_hw3.Leg(5, 6, 4, 1, 0),
+	MCNF_Objects_hw3.Leg(3, 5, 4, 2, 0),
+	MCNF_Objects_hw3.Leg(4, 2, 5, 1, 0),
+	MCNF_Objects_hw3.Leg(4, 5, 5, 2, 0)
 ]
 
 # setting legs for each port
@@ -50,29 +50,29 @@ for theTerminal in terminalNames:
 	# to set inbound and outbound legs for the specified time period
 	terminal = terminals.get(theTerminal)
 
-	inBoundList = []
-	outBoundList = []
 	for x in range(len(terminal)):
 		# adding inbound legs (legs that will arrive this terminal
 		terminalAndTime = terminal[x]
+		inBoundList = []
+		outBoundList = []
+
 		for theLeg in legs:
 			if isinstance(terminalAndTime, MCNF_Objects_hw3.City):
-				if theLeg.destination == terminalAndTime.portName & theLeg.end == terminalAndTime.time:
+				if theLeg.destination == terminalAndTime.portName and theLeg.end == terminalAndTime.time:
 					inBoundList.append(theLeg)
+		terminalAndTime.inboundLegs = inBoundList
 
 		# adding outbound legs
 		for theLeg in legs:
 			if isinstance(terminalAndTime, MCNF_Objects_hw3.City):
-				if theLeg.origin == terminalAndTime.portName & theLeg.start == terminalAndTime.time:
+				if theLeg.origin == terminalAndTime.portName and theLeg.start == terminalAndTime.time:
 					outBoundList.append(theLeg)
 
-		# setting outbound and inbound legs of the node.
-		terminalAndTime.inboundLegs = inBoundList
 		terminalAndTime.outboundLegs = outBoundList
 
 
 # Code to test that all ports have the correct legs
-output = terminals["New York"].inboundLegs
+output = terminals[1]
 for out in output:
 	if isinstance(out, MCNF_Objects_hw3.Leg):
 		print out.origin
