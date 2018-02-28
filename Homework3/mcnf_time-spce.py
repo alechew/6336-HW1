@@ -38,12 +38,12 @@ legs = [
 	MCNF_Objects_hw3.Leg("3", "4", 3, 3, 1),
 	MCNF_Objects_hw3.Leg("5", "6", 3, 1, 1),
 	MCNF_Objects_hw3.Leg("3", "5", 3, 2, 1),
-	MCNF_Objects_hw3.Leg("1", "6", 4, 3, 1),
+	MCNF_Objects_hw3.Leg("1", "6", 4, 3, 1),		# 10
 	MCNF_Objects_hw3.Leg("2", "4", 4, 1, 1),
 	MCNF_Objects_hw3.Leg("5", "6", 4, 1, 1),
 	MCNF_Objects_hw3.Leg("3", "5", 4, 2, 1),
 	MCNF_Objects_hw3.Leg("4", "2", 5, 1, 1),
-	MCNF_Objects_hw3.Leg("4", "5", 5, 2, 1),
+	MCNF_Objects_hw3.Leg("4", "5", 5, 2, 1),		# 14
 	MCNF_Objects_hw3.Leg("1", "1", 1, 1, 1),# inventory arcs
 	MCNF_Objects_hw3.Leg("1", "1", 2, 1, 1),
 	MCNF_Objects_hw3.Leg("1", "1", 3, 1, 1),
@@ -116,7 +116,7 @@ for theTerminal in terminalNames:
 
 
 # Code to test that all ports have the correct legs
-output = terminals[1]
+output = terminals[7]
 for out in output:
 	if isinstance(out, MCNF_Objects_hw3.Leg):
 		print out.origin
