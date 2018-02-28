@@ -16,14 +16,14 @@ terminalNames = [0, 1, 2, 3, 4, 5, 6, 7]
 #  0 is source and 7 is sink
 # name, time, net supplies
 terminals = {
-	0 : [MCNF_Objects_hw3_lowerbound.City("0", 0, 100)],
+	0 : [MCNF_Objects_hw3_lowerbound.City("0", 0, 26)],
 	1 : [MCNF_Objects_hw3_lowerbound.City("1", 1, 0), MCNF_Objects_hw3_lowerbound.City("1", 2, 0), MCNF_Objects_hw3_lowerbound.City("1", 3, 0), MCNF_Objects_hw3_lowerbound.City("1", 4, 0), MCNF_Objects_hw3_lowerbound.City("1", 5, 0)],
 	2 : [MCNF_Objects_hw3_lowerbound.City("2", 1, 0), MCNF_Objects_hw3_lowerbound.City("2", 2, 0), MCNF_Objects_hw3_lowerbound.City("2", 3, 0), MCNF_Objects_hw3_lowerbound.City("2", 4, 0), MCNF_Objects_hw3_lowerbound.City("2", 5, 0)],
 	3 : [MCNF_Objects_hw3_lowerbound.City("3", 1, 0), MCNF_Objects_hw3_lowerbound.City("3", 2, 0), MCNF_Objects_hw3_lowerbound.City("3", 3, 0), MCNF_Objects_hw3_lowerbound.City("3", 4, 0), MCNF_Objects_hw3_lowerbound.City("3", 5, 0)],
 	4 : [MCNF_Objects_hw3_lowerbound.City("4", 1, 0), MCNF_Objects_hw3_lowerbound.City("4", 2, 0), MCNF_Objects_hw3_lowerbound.City("4", 3, 0), MCNF_Objects_hw3_lowerbound.City("4", 4, 0), MCNF_Objects_hw3_lowerbound.City("4", 5, 0)],
 	5 : [MCNF_Objects_hw3_lowerbound.City("5", 1, 0), MCNF_Objects_hw3_lowerbound.City("5", 2, 0), MCNF_Objects_hw3_lowerbound.City("5", 3, 0), MCNF_Objects_hw3_lowerbound.City("5", 4, 0), MCNF_Objects_hw3_lowerbound.City("5", 5, 0)],
 	6 : [MCNF_Objects_hw3_lowerbound.City("6", 1, 0), MCNF_Objects_hw3_lowerbound.City("6", 2, 0), MCNF_Objects_hw3_lowerbound.City("6", 3, 0), MCNF_Objects_hw3_lowerbound.City("6", 4, 0), MCNF_Objects_hw3_lowerbound.City("6", 5, 0)],
-	7 : [MCNF_Objects_hw3_lowerbound.City("7", 6, -100)]
+	7 : [MCNF_Objects_hw3_lowerbound.City("7", 6, -26)]
 		}
 
 # creating legs
@@ -74,12 +74,12 @@ legs = [
 	MCNF_Objects_hw3_lowerbound.Leg("6", "6", 3, 1, 0, 0),
 	MCNF_Objects_hw3_lowerbound.Leg("6", "6", 4, 1, 0, 0),
 	MCNF_Objects_hw3_lowerbound.Leg("6", "6", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3_lowerbound.Leg("0", "1", 0, 1, 0, 0),		# source - terminal arcs
-	MCNF_Objects_hw3_lowerbound.Leg("0", "2", 0, 1, 0, 0),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "3", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "1", 0, 1, 0, 7),		# source - terminal arcs #7 3 11 0 3 2
+	MCNF_Objects_hw3_lowerbound.Leg("0", "2", 0, 1, 0, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "3", 0, 1, 0, 11),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "4", 0, 1, 0, 0),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "5", 0, 1, 0, 0),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "6", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "5", 0, 1, 0, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "6", 0, 1, 0, 2),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "7", 0, 6, 0, 0) 		# drain
 ]
 
@@ -185,3 +185,6 @@ for v in prob.variables():
 
 # The optimised objective function value is printed to the screen
 print "Total Cost = ", value(prob.objective)
+
+
+#7 3 11 0 3 2
