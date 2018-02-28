@@ -22,7 +22,7 @@ terminals = {
 	3 : [MCNF_Objects_hw3.City("3", 1, 0), MCNF_Objects_hw3.City("3", 2, 0), MCNF_Objects_hw3.City("3", 3, -8), MCNF_Objects_hw3.City("3", 4, -3), MCNF_Objects_hw3.City("3", 5, 3)],
 	4 : [MCNF_Objects_hw3.City("4", 1, 0), MCNF_Objects_hw3.City("4", 2, -2), MCNF_Objects_hw3.City("4", 3, 0), MCNF_Objects_hw3.City("4", 4, 0), MCNF_Objects_hw3.City("4", 5, -1)],
 	5 : [MCNF_Objects_hw3.City("5", 1, -1), MCNF_Objects_hw3.City("5", 2, 2), MCNF_Objects_hw3.City("5", 3, -4), MCNF_Objects_hw3.City("5", 4, 0), MCNF_Objects_hw3.City("5", 5, 4)],
-	6 : [MCNF_Objects_hw3.City("6", 1, 0), MCNF_Objects_hw3.City("6", 2, 0), MCNF_Objects_hw3.City("6", 3, 0), MCNF_Objects_hw3.City("6", 4, 4), MCNF_Objects_hw3.City("6", 5, 2)],
+	6 : [MCNF_Objects_hw3.City("6", 1, -2), MCNF_Objects_hw3.City("6", 2, 0), MCNF_Objects_hw3.City("6", 3, 0), MCNF_Objects_hw3.City("6", 4, 4), MCNF_Objects_hw3.City("6", 5, 2)],
 	7 : [MCNF_Objects_hw3.City("7", 6, -87)]
 		}
 
@@ -31,56 +31,56 @@ terminals = {
 legs = [
 	MCNF_Objects_hw3.Leg("1", "4", 1, 1, 1),
 	MCNF_Objects_hw3.Leg("6", "5", 1, 1, 1),
-	MCNF_Objects_hw3.Leg("5", "1", 1, 3, 1),
-	MCNF_Objects_hw3.Leg("1", "5", 2, 3, 1),
-	MCNF_Objects_hw3.Leg("4", "3", 2, 3, 1),
-	MCNF_Objects_hw3.Leg("4", "5", 2, 2, 1),
-	MCNF_Objects_hw3.Leg("3", "4", 3, 3, 1),
+	MCNF_Objects_hw3.Leg("5", "1", 1, 3, 3),
+	MCNF_Objects_hw3.Leg("1", "5", 2, 3, 3),
+	MCNF_Objects_hw3.Leg("4", "3", 2, 3, 3),
+	MCNF_Objects_hw3.Leg("4", "5", 2, 2, 2),
+	MCNF_Objects_hw3.Leg("3", "4", 3, 3, 3),
 	MCNF_Objects_hw3.Leg("5", "6", 3, 1, 1),
-	MCNF_Objects_hw3.Leg("3", "5", 3, 2, 1),
-	MCNF_Objects_hw3.Leg("1", "6", 4, 3, 1),		# 10
+	MCNF_Objects_hw3.Leg("3", "5", 3, 2, 2),
+	MCNF_Objects_hw3.Leg("1", "6", 4, 3, 3),		# 10
 	MCNF_Objects_hw3.Leg("2", "4", 4, 1, 1),
 	MCNF_Objects_hw3.Leg("5", "6", 4, 1, 1),
-	MCNF_Objects_hw3.Leg("3", "5", 4, 2, 1),
+	MCNF_Objects_hw3.Leg("3", "5", 4, 2, 2),
 	MCNF_Objects_hw3.Leg("4", "2", 5, 1, 1),
-	MCNF_Objects_hw3.Leg("4", "5", 5, 2, 1),		# 14
-	MCNF_Objects_hw3.Leg("1", "1", 1, 1, 1),# inventory arcs
-	MCNF_Objects_hw3.Leg("1", "1", 2, 1, 1),
-	MCNF_Objects_hw3.Leg("1", "1", 3, 1, 1),
-	MCNF_Objects_hw3.Leg("1", "1", 4, 1, 1),
-	MCNF_Objects_hw3.Leg("1", "1", 5, 1, 1),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3.Leg("2", "2", 1, 1, 1),
-	MCNF_Objects_hw3.Leg("2", "2", 2, 1, 1),
-	MCNF_Objects_hw3.Leg("2", "2", 3, 1, 1),
-	MCNF_Objects_hw3.Leg("2", "2", 4, 1, 1),
-	MCNF_Objects_hw3.Leg("2", "2", 5, 1, 1),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3.Leg("3", "3", 1, 1, 1),
-	MCNF_Objects_hw3.Leg("3", "3", 2, 1, 1),
-	MCNF_Objects_hw3.Leg("3", "3", 3, 1, 1),
-	MCNF_Objects_hw3.Leg("3", "3", 4, 1, 1),
-	MCNF_Objects_hw3.Leg("3", "3", 5, 1, 1),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3.Leg("4", "4", 1, 1, 1),
-	MCNF_Objects_hw3.Leg("4", "4", 2, 1, 1),
-	MCNF_Objects_hw3.Leg("4", "4", 3, 1, 1),
-	MCNF_Objects_hw3.Leg("4", "4", 4, 1, 1),
-	MCNF_Objects_hw3.Leg("4", "4", 5, 1, 1),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3.Leg("5", "5", 1, 1, 1),
-	MCNF_Objects_hw3.Leg("5", "5", 2, 1, 1),
-	MCNF_Objects_hw3.Leg("5", "5", 3, 1, 1),
-	MCNF_Objects_hw3.Leg("5", "5", 4, 1, 1),
-	MCNF_Objects_hw3.Leg("5", "5", 5, 1, 1),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3.Leg("6", "6", 1, 1, 1),
-	MCNF_Objects_hw3.Leg("6", "6", 2, 1, 1),
-	MCNF_Objects_hw3.Leg("6", "6", 3, 1, 1),
-	MCNF_Objects_hw3.Leg("6", "6", 4, 1, 1),
-	MCNF_Objects_hw3.Leg("6", "6", 5, 1, 1),		# this are the inventory arcs that goes to sink
+	MCNF_Objects_hw3.Leg("4", "5", 5, 2, 2),		# 14
+	MCNF_Objects_hw3.Leg("1", "1", 1, 1, 0),# inventory arcs
+	MCNF_Objects_hw3.Leg("1", "1", 2, 1, 0),
+	MCNF_Objects_hw3.Leg("1", "1", 3, 1, 0),
+	MCNF_Objects_hw3.Leg("1", "1", 4, 1, 0),
+	MCNF_Objects_hw3.Leg("1", "1", 5, 1, 0),		# this are the inventory arcs that goes to sink
+	MCNF_Objects_hw3.Leg("2", "2", 1, 1, 0),
+	MCNF_Objects_hw3.Leg("2", "2", 2, 1, 0),
+	MCNF_Objects_hw3.Leg("2", "2", 3, 1, 0),
+	MCNF_Objects_hw3.Leg("2", "2", 4, 1, 0),
+	MCNF_Objects_hw3.Leg("2", "2", 5, 1, 0),		# this are the inventory arcs that goes to sink
+	MCNF_Objects_hw3.Leg("3", "3", 1, 1, 0),
+	MCNF_Objects_hw3.Leg("3", "3", 2, 1, 0),
+	MCNF_Objects_hw3.Leg("3", "3", 3, 1, 0),
+	MCNF_Objects_hw3.Leg("3", "3", 4, 1, 0),
+	MCNF_Objects_hw3.Leg("3", "3", 5, 1, 0),		# this are the inventory arcs that goes to sink
+	MCNF_Objects_hw3.Leg("4", "4", 1, 1, 0),
+	MCNF_Objects_hw3.Leg("4", "4", 2, 1, 0),
+	MCNF_Objects_hw3.Leg("4", "4", 3, 1, 0),
+	MCNF_Objects_hw3.Leg("4", "4", 4, 1, 0),
+	MCNF_Objects_hw3.Leg("4", "4", 5, 1, 0),		# this are the inventory arcs that goes to sink
+	MCNF_Objects_hw3.Leg("5", "5", 1, 1, 0),
+	MCNF_Objects_hw3.Leg("5", "5", 2, 1, 0),
+	MCNF_Objects_hw3.Leg("5", "5", 3, 1, 0),
+	MCNF_Objects_hw3.Leg("5", "5", 4, 1, 0),
+	MCNF_Objects_hw3.Leg("5", "5", 5, 1, 0),		# this are the inventory arcs that goes to sink
+	MCNF_Objects_hw3.Leg("6", "6", 1, 1, 0),
+	MCNF_Objects_hw3.Leg("6", "6", 2, 1, 0),
+	MCNF_Objects_hw3.Leg("6", "6", 3, 1, 0),
+	MCNF_Objects_hw3.Leg("6", "6", 4, 1, 0),
+	MCNF_Objects_hw3.Leg("6", "6", 5, 1, 0),		# this are the inventory arcs that goes to sink
 	MCNF_Objects_hw3.Leg("0", "1", 0, 1, 0),		# source - terminal arcs
 	MCNF_Objects_hw3.Leg("0", "2", 0, 1, 0),
 	MCNF_Objects_hw3.Leg("0", "3", 0, 1, 0),
 	MCNF_Objects_hw3.Leg("0", "4", 0, 1, 0),
 	MCNF_Objects_hw3.Leg("0", "5", 0, 1, 0),
 	MCNF_Objects_hw3.Leg("0", "6", 0, 1, 0),
-	MCNF_Objects_hw3.Leg("0", "7", 0, 0, 0) 		# drain
+	MCNF_Objects_hw3.Leg("0", "7", 0, 6, 0) 		# drain
 ]
 
 # setting legs for each port
@@ -168,9 +168,16 @@ prob.solve(GUROBI())
 # The status of the solution is printed to the screen
 print "Status:", LpStatus[prob.status]
 
+totaldays = 0
+
 # Each of the variables is printed with it's resolved optimum value
+# counter = 0
 for v in prob.variables():
 	print v.name, "=", v.varValue
+# 	totaldays = totaldays + (v.varValue * legs[counter].traveltime)
+# 	counter = counter + 1
+#
+# print "total days = " + str(totaldays)
 
 # The optimised objective function value is printed to the screen
 print "Total Cost = ", value(prob.objective)
