@@ -21,9 +21,9 @@ terminals = {
 	2 : [MCNF_Objects_hw3.City("2", 1, 0), MCNF_Objects_hw3.City("2", 2, 0), MCNF_Objects_hw3.City("2", 3, 0), MCNF_Objects_hw3.City("2", 4, -3), MCNF_Objects_hw3.City("2", 5, 0)],
 	3 : [MCNF_Objects_hw3.City("3", 1, 0), MCNF_Objects_hw3.City("3", 2, 0), MCNF_Objects_hw3.City("3", 3, -8), MCNF_Objects_hw3.City("3", 4, -3), MCNF_Objects_hw3.City("3", 5, 3)],
 	4 : [MCNF_Objects_hw3.City("4", 1, 0), MCNF_Objects_hw3.City("4", 2, -2), MCNF_Objects_hw3.City("4", 3, 0), MCNF_Objects_hw3.City("4", 4, 0), MCNF_Objects_hw3.City("4", 5, -1)],
-	5 : [MCNF_Objects_hw3.City("5", 1, -1), MCNF_Objects_hw3.City("5", 2, 0), MCNF_Objects_hw3.City("5", 3, -4), MCNF_Objects_hw3.City("5", 4, 0), MCNF_Objects_hw3.City("5", 5, 4)],
-	6 : [MCNF_Objects_hw3.City("6", 1, -2), MCNF_Objects_hw3.City("6", 2, 0), MCNF_Objects_hw3.City("6", 3, 0), MCNF_Objects_hw3.City("6", 4, 4), MCNF_Objects_hw3.City("6", 5, 2)],
-	7 : [MCNF_Objects_hw3.City("7", 6, -100)]
+	5 : [MCNF_Objects_hw3.City("5", 1, -1), MCNF_Objects_hw3.City("5", 2, 2), MCNF_Objects_hw3.City("5", 3, -4), MCNF_Objects_hw3.City("5", 4, 0), MCNF_Objects_hw3.City("5", 5, 4)],
+	6 : [MCNF_Objects_hw3.City("6", 1, 0), MCNF_Objects_hw3.City("6", 2, 0), MCNF_Objects_hw3.City("6", 3, 0), MCNF_Objects_hw3.City("6", 4, 4), MCNF_Objects_hw3.City("6", 5, 2)],
+	7 : [MCNF_Objects_hw3.City("7", 6, -87)]
 		}
 
 # creating legs
@@ -80,7 +80,7 @@ legs = [
 	MCNF_Objects_hw3.Leg("0", "4", 0, 1, 0),
 	MCNF_Objects_hw3.Leg("0", "5", 0, 1, 0),
 	MCNF_Objects_hw3.Leg("0", "6", 0, 1, 0),
-	MCNF_Objects_hw3.Leg("0", "7", 0, 6, 0) 		# drain
+	MCNF_Objects_hw3.Leg("0", "7", 0, 0, 0) 		# drain
 ]
 
 # setting legs for each port
@@ -139,7 +139,7 @@ for leg in legs:
 
 
 # The objective function is added to 'prob' first
-prob += lpSum(legs[i].traveltime * legs[i].arcFlow for i in range(len(legs))), "Total Cost"
+prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(len(legs))), "Total Cost"
 
 for portName in terminalNames:
 	terminal = terminals.get(portName)
