@@ -10,6 +10,7 @@ class Leg:
         self.cost = cost
         self.traveltime = daysTraveled
         self.arcFlow = 0
+        self.demand = demand
 
 
 class City:

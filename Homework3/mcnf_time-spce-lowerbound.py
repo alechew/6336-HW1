@@ -23,7 +23,7 @@ terminals = {
 	4 : [MCNF_Objects_hw3_lowerbound.City("4", 1, 0), MCNF_Objects_hw3_lowerbound.City("4", 2, 0), MCNF_Objects_hw3_lowerbound.City("4", 3, 0), MCNF_Objects_hw3_lowerbound.City("4", 4, 0), MCNF_Objects_hw3_lowerbound.City("4", 5, 0)],
 	5 : [MCNF_Objects_hw3_lowerbound.City("5", 1, 0), MCNF_Objects_hw3_lowerbound.City("5", 2, 0), MCNF_Objects_hw3_lowerbound.City("5", 3, 0), MCNF_Objects_hw3_lowerbound.City("5", 4, 0), MCNF_Objects_hw3_lowerbound.City("5", 5, 0)],
 	6 : [MCNF_Objects_hw3_lowerbound.City("6", 1, 0), MCNF_Objects_hw3_lowerbound.City("6", 2, 0), MCNF_Objects_hw3_lowerbound.City("6", 3, 0), MCNF_Objects_hw3_lowerbound.City("6", 4, 0), MCNF_Objects_hw3_lowerbound.City("6", 5, 0)],
-	7 : [MCNF_Objects_hw3_lowerbound.City("7", 6, -87)]
+	7 : [MCNF_Objects_hw3_lowerbound.City("7", 6, -100)]
 		}
 
 # creating legs
@@ -143,6 +143,10 @@ prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(len(legs))), "Total 
 
 for portName in terminalNames:
 	terminal = terminals.get(portName)
+
+	#lowerbound constraints
+	for leg in legs:
+		prob += leg.arcFlow >= leg.demand
 
 	for x in range(len(terminal)):
 		currentTerminal = terminal[x]
