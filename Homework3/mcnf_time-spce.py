@@ -74,13 +74,13 @@ legs = [
 	MCNF_Objects_hw3.Leg("6", "6", 3, 1, 1),
 	MCNF_Objects_hw3.Leg("6", "6", 4, 1, 1),
 	MCNF_Objects_hw3.Leg("6", "6", 5, 1, 1),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3.Leg("0", "1", 0, 1, 1),		# source - terminal arcs
-	MCNF_Objects_hw3.Leg("0", "2", 0, 1, 1),
-	MCNF_Objects_hw3.Leg("0", "3", 0, 1, 1),
-	MCNF_Objects_hw3.Leg("0", "4", 0, 1, 1),
-	MCNF_Objects_hw3.Leg("0", "5", 0, 1, 1),
-	MCNF_Objects_hw3.Leg("0", "6", 0, 1, 1),
-	MCNF_Objects_hw3.Leg("0", "7", 0, 6, 0) 		# drain
+	MCNF_Objects_hw3.Leg("0", "1", 0, 0, 0),		# source - terminal arcs
+	MCNF_Objects_hw3.Leg("0", "2", 0, 0, 0),
+	MCNF_Objects_hw3.Leg("0", "3", 0, 0, 0),
+	MCNF_Objects_hw3.Leg("0", "4", 0, 0, 0),
+	MCNF_Objects_hw3.Leg("0", "5", 0, 0, 0),
+	MCNF_Objects_hw3.Leg("0", "6", 0, 0, 0),
+	MCNF_Objects_hw3.Leg("0", "7", 0, 0, 0) 		# drain
 ]
 
 # setting legs for each port
@@ -136,7 +136,7 @@ for leg in legs:
 
 
 # The objective function is added to 'prob' first
-prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(len(legs))), "Total Cost"
+prob += lpSum(legs[i].traveltime * legs[i].arcFlow for i in range(len(legs))), "Total Cost"
 
 for portName in terminalNames:
 	terminal = terminals.get(portName)

@@ -8,6 +8,7 @@ class Leg:
             self.destination = "7" + "_" + str(dest) + "_" + str(self.end)
             self.end = 6
         self.cost = cost
+        self.traveltime = daysTraveled
         self.arcFlow = 0
 
 
