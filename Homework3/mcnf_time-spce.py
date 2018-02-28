@@ -74,13 +74,13 @@ legs = [
 	MCNF_Objects_hw3.Leg("6", "6", 3, 1, 1),
 	MCNF_Objects_hw3.Leg("6", "6", 4, 1, 1),
 	MCNF_Objects_hw3.Leg("6", "6", 5, 1, 1),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3.Leg("0", "1", 0, 0, 0),		# source - terminal arcs
-	MCNF_Objects_hw3.Leg("0", "2", 0, 0, 0),
-	MCNF_Objects_hw3.Leg("0", "3", 0, 0, 0),
-	MCNF_Objects_hw3.Leg("0", "4", 0, 0, 0),
-	MCNF_Objects_hw3.Leg("0", "5", 0, 0, 0),
-	MCNF_Objects_hw3.Leg("0", "6", 0, 0, 0),
-	MCNF_Objects_hw3.Leg("0", "7", 0, 0, 0) 		# drain
+	MCNF_Objects_hw3.Leg("0", "1", 0, 1, 0),		# source - terminal arcs
+	MCNF_Objects_hw3.Leg("0", "2", 0, 1, 0),
+	MCNF_Objects_hw3.Leg("0", "3", 0, 1, 0),
+	MCNF_Objects_hw3.Leg("0", "4", 0, 1, 0),
+	MCNF_Objects_hw3.Leg("0", "5", 0, 1, 0),
+	MCNF_Objects_hw3.Leg("0", "6", 0, 1, 0),
+	MCNF_Objects_hw3.Leg("0", "7", 0, 6, 0) 		# drain
 ]
 
 # setting legs for each port
@@ -104,6 +104,10 @@ for theTerminal in terminalNames:
 			if isinstance(terminalAndTime, MCNF_Objects_hw3.City):
 				if theLeg.destination.__contains__(terminalAndTime.portName) and theLeg.end == terminalAndTime.time:
 					inBoundList.append(theLeg)
+
+				elif theLeg.end >= 6 and terminalAndTime.portName == "7":
+					inBoundList.append(theLeg)
+
 		terminalAndTime.inboundLegs = inBoundList
 
 		# adding outbound legs
@@ -130,7 +134,6 @@ prob = LpProblem("MinCost Network Flow", LpMinimize)
 
 for leg in legs:
 	if isinstance(leg, MCNF_Objects_hw3.Leg):
-		letMeSeeLEg = leg
 		var = LpVariable("ArcFlow_(%s,%s)" % (str(leg.origin) + "_" + str(leg.start), str(leg.destination) + "_" + str(leg.end)), 0)
 		leg.arcFlow = var
 
