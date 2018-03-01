@@ -74,10 +74,10 @@ legs = [
 	MCNF_Objects_hw3_lowerbound.Leg("6", "6", 3, 1, 0, 0),
 	MCNF_Objects_hw3_lowerbound.Leg("6", "6", 4, 1, 0, 0),
 	MCNF_Objects_hw3_lowerbound.Leg("6", "6", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3_lowerbound.Leg("0", "1", 0, 1, 0, 7),		# source - terminal arcs #7 3 11 0 3 2
+	MCNF_Objects_hw3_lowerbound.Leg("0", "1", 0, 1, 0, 4),		# source - terminal arcs #7 3 11 0 3 2
 	MCNF_Objects_hw3_lowerbound.Leg("0", "2", 0, 1, 0, 3),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "3", 0, 1, 0, 11),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "4", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "4", 0, 1, 0, 3),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "5", 0, 1, 0, 3),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "6", 0, 1, 0, 2),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "7", 0, 6, 0, 0) 		# drain
