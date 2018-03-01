@@ -130,11 +130,6 @@ prob = LpProblem("MinCost Network Flow", LpMinimize)
 # Decision variables
 # Build arc flow variables for each arc, lower bounds = 0
 
-for leg in legs:
-	if isinstance(leg, MCNF_Objects_hw3_lowerbound.Leg):
-		var = LpVariable("ArcFlow_(%s,%s)" % (str(leg.origin) + "_" + str(leg.start), str(leg.destination) + "_" + str(leg.end)), 0)
-		leg.arcFlow = var
-
 
 # The objective function is added to 'prob' first
 prob += lpSum(legs[i].cost * legs[i].arcFlow for i in range(len(legs))), "Total Cost"
