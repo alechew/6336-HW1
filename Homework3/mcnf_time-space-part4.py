@@ -43,44 +43,30 @@ legs = [
 	MCNF_Objects_hw3_lowerbound.Leg("5", "6", 4, 1, 1, 2),
 	MCNF_Objects_hw3_lowerbound.Leg("3", "5", 4, 2, 2, 3),
 	MCNF_Objects_hw3_lowerbound.Leg("4", "2", 5, 1, 1, 1),
-	MCNF_Objects_hw3_lowerbound.Leg("4", "5", 5, 2, 2, 3),		# 14
-	# MCNF_Objects_hw3_lowerbound.Leg("1", "1", 1, 1, 0, 0),# inventory arcs
-	# MCNF_Objects_hw3_lowerbound.Leg("1", "1", 2, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("1", "1", 3, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("1", "1", 4, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("1", "1", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	# MCNF_Objects_hw3_lowerbound.Leg("2", "2", 1, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("2", "2", 2, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("2", "2", 3, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("2", "2", 4, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("2", "2", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	# MCNF_Objects_hw3_lowerbound.Leg("3", "3", 1, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("3", "3", 2, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("3", "3", 3, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("3", "3", 4, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("3", "3", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	# MCNF_Objects_hw3_lowerbound.Leg("4", "4", 1, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("4", "4", 2, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("4", "4", 3, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("4", "4", 4, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("4", "4", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	# MCNF_Objects_hw3_lowerbound.Leg("5", "5", 1, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("5", "5", 2, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("5", "5", 3, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("5", "5", 4, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("5", "5", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	# MCNF_Objects_hw3_lowerbound.Leg("6", "6", 1, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("6", "6", 2, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("6", "6", 3, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("6", "6", 4, 1, 0, 0),
-	# MCNF_Objects_hw3_lowerbound.Leg("6", "6", 5, 1, 0, 0),		# this are the inventory arcs that goes to sink
-	MCNF_Objects_hw3_lowerbound.Leg("0", "1", 0, 1, 0, 7),		# source - terminal arcs #7 3 11 0 3 2
-	MCNF_Objects_hw3_lowerbound.Leg("0", "2", 0, 1, 0, 3),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "3", 0, 1, 0, 11),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "4", 0, 1, 0, 2),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "5", 0, 1, 0, 5),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "6", 0, 1, 0, 4),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "7", 0, 6, 0, 0) 		# drain
+	MCNF_Objects_hw3_lowerbound.Leg("4", "5", 5, 2, 2, 3),
+
+	MCNF_Objects_hw3_lowerbound.Leg("1", "4", 6, 1, 1, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("6", "5", 6, 1, 1, 2),
+	MCNF_Objects_hw3_lowerbound.Leg("5", "1", 6, 3, 3, 1),
+	MCNF_Objects_hw3_lowerbound.Leg("1", "5", 7, 3, 3, 1),
+	MCNF_Objects_hw3_lowerbound.Leg("4", "3", 7, 3, 3, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("4", "5", 7, 2, 2, 2),
+	MCNF_Objects_hw3_lowerbound.Leg("3", "4", 8, 3, 3, 5),
+	MCNF_Objects_hw3_lowerbound.Leg("5", "6", 8, 1, 1, 4),
+	MCNF_Objects_hw3_lowerbound.Leg("3", "5", 8, 2, 2, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("1", "6", 8, 3, 3, 1),  # 10
+	MCNF_Objects_hw3_lowerbound.Leg("2", "4", 9, 1, 1, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("5", "6", 9, 1, 1, 2),
+	MCNF_Objects_hw3_lowerbound.Leg("3", "5", 9, 2, 2, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("4", "2", 10, 1, 1, 1),
+	MCNF_Objects_hw3_lowerbound.Leg("4", "5", 10, 2, 2, 3),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "1", 0, 1, 0, 0),		# source - terminal arcs #7 3 11 0 3 2
+	MCNF_Objects_hw3_lowerbound.Leg("0", "2", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "3", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "4", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "5", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "6", 0, 1, 0, 0),
+	MCNF_Objects_hw3_lowerbound.Leg("0", "11", 0, 6, 0, 0) 		# drain
 ]
 
 # generating inventory arcs
