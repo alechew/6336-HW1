@@ -22,7 +22,7 @@ terminals = {
 	3 : [MCNF_Objects_hw3_lowerbound.City("3", 1, 0), MCNF_Objects_hw3_lowerbound.City("3", 2, 0), MCNF_Objects_hw3_lowerbound.City("3", 3, -8), MCNF_Objects_hw3_lowerbound.City("3", 4, -3), MCNF_Objects_hw3_lowerbound.City("3", 5, 3), MCNF_Objects_hw3_lowerbound.City("3", 6, 0), MCNF_Objects_hw3_lowerbound.City("3", 7, 0), MCNF_Objects_hw3_lowerbound.City("3", 8, -8), MCNF_Objects_hw3_lowerbound.City("3", 9, -3), MCNF_Objects_hw3_lowerbound.City("3", 10, 3)],
 	4 : [MCNF_Objects_hw3_lowerbound.City("4", 1, 0), MCNF_Objects_hw3_lowerbound.City("4", 2, -2), MCNF_Objects_hw3_lowerbound.City("4", 3, 0), MCNF_Objects_hw3_lowerbound.City("4", 4, 0), MCNF_Objects_hw3_lowerbound.City("4", 5, -1), MCNF_Objects_hw3_lowerbound.City("4", 6, 5), MCNF_Objects_hw3_lowerbound.City("4", 7, -2), MCNF_Objects_hw3_lowerbound.City("4", 8, 0), MCNF_Objects_hw3_lowerbound.City("4", 9, 0), MCNF_Objects_hw3_lowerbound.City("4", 10, -1)],
 	5 : [MCNF_Objects_hw3_lowerbound.City("5", 1, -1), MCNF_Objects_hw3_lowerbound.City("5", 2, 2), MCNF_Objects_hw3_lowerbound.City("5", 3, -4), MCNF_Objects_hw3_lowerbound.City("5", 4, 0), MCNF_Objects_hw3_lowerbound.City("5", 5, 4), MCNF_Objects_hw3_lowerbound.City("5", 6, 2), MCNF_Objects_hw3_lowerbound.City("5", 7, 5), MCNF_Objects_hw3_lowerbound.City("5", 8, -4), MCNF_Objects_hw3_lowerbound.City("5", 9, 0), MCNF_Objects_hw3_lowerbound.City("5", 10, 4)],
-	6 : [MCNF_Objects_hw3_lowerbound.City("6", 1, -2), MCNF_Objects_hw3_lowerbound.City("6", 2, 0), MCNF_Objects_hw3_lowerbound.City("6", 3, 0), MCNF_Objects_hw3_lowerbound.City("6", 4, 4), MCNF_Objects_hw3_lowerbound.City("6", 5, 2), MCNF_Objects_hw3_lowerbound.City("6", 6, -2), MCNF_Objects_hw3_lowerbound.City("6", 7, 0), MCNF_Objects_hw3_lowerbound.City("6", 8, 0), MCNF_Objects_hw3_lowerbound.City("6", 9, 4), MCNF_Objects_hw3_lowerbound.City("6", 10, 2)],
+	6 : [MCNF_Objects_hw3_lowerbound.City("6", 1, -2), MCNF_Objects_hw3_lowerbound.City("6", 2, 0), MCNF_Objects_hw3_lowerbound.City("6", 3, 0), MCNF_Objects_hw3_lowerbound.City("6", 4, 4), MCNF_Objects_hw3_lowerbound.City("6", 5, 2), MCNF_Objects_hw3_lowerbound.City("6", 6, -2), MCNF_Objects_hw3_lowerbound.City("6", 7, 1), MCNF_Objects_hw3_lowerbound.City("6", 8, 0), MCNF_Objects_hw3_lowerbound.City("6", 9, 4), MCNF_Objects_hw3_lowerbound.City("6", 10, 2)],
 	7 : [MCNF_Objects_hw3_lowerbound.City("7", 11, -87)]
 		}
 
@@ -54,7 +54,7 @@ legs = [
 	MCNF_Objects_hw3_lowerbound.Leg("3", "4", 8, 3, 3, 5),
 	MCNF_Objects_hw3_lowerbound.Leg("5", "6", 8, 1, 1, 4),
 	MCNF_Objects_hw3_lowerbound.Leg("3", "5", 8, 2, 2, 3),
-	MCNF_Objects_hw3_lowerbound.Leg("1", "6", 8, 3, 3, 1),  # 10
+	MCNF_Objects_hw3_lowerbound.Leg("1", "6", 9, 3, 3, 1),  # 10
 	MCNF_Objects_hw3_lowerbound.Leg("2", "4", 9, 1, 1, 3),
 	MCNF_Objects_hw3_lowerbound.Leg("5", "6", 9, 1, 1, 2),
 	MCNF_Objects_hw3_lowerbound.Leg("3", "5", 9, 2, 2, 3),
@@ -66,7 +66,7 @@ legs = [
 	MCNF_Objects_hw3_lowerbound.Leg("0", "4", 0, 1, 0, 0),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "5", 0, 1, 0, 0),
 	MCNF_Objects_hw3_lowerbound.Leg("0", "6", 0, 1, 0, 0),
-	MCNF_Objects_hw3_lowerbound.Leg("0", "11", 0, 6, 0, 0) 		# drain
+	MCNF_Objects_hw3_lowerbound.Leg("0", "7", 0, 11, 0, 0) 		# drain
 ]
 
 # generating inventory arcs
@@ -95,7 +95,7 @@ for theTerminal in terminalNames:
 
 		# for loop to add the legs going to sink only
 		for theLeg in legs:
-			if theLeg.end >= 6:
+			if theLeg.end >= 11:
 				terminals.get(7)[0].inboundLegs.append(theLeg)
 
 		for theLeg in legs:
@@ -103,7 +103,7 @@ for theTerminal in terminalNames:
 				if theLeg.destination.__contains__(terminalAndTime.portName) and theLeg.end == terminalAndTime.time:
 					inBoundList.append(theLeg)
 
-				elif theLeg.end >= 6 and terminalAndTime.portName == "7":
+				elif theLeg.end >= 11 and terminalAndTime.portName == "7":
 					inBoundList.append(theLeg)
 
 		terminalAndTime.inboundLegs = inBoundList
