@@ -187,3 +187,5 @@ minfleetsize = 0
 for myleg in legs:
 	if myleg.origin.__contains__("0") and myleg.destination != "7":
 		minfleetsize += myleg.arcFlow.varValue
+
+print str(minfleetsize)
