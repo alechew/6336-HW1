@@ -27,7 +27,7 @@ terminals = {
 		}
 
 # creating legs
-# Origin, Destination, StartTime, duration, cost.  EndTime will be 6 for those that are not in planning horizon.
+# Origin, Destination, StartTime, duration, cost is the travel time.  EndTime will be 6 for those that are not in planning horizon.
 legs = [
 	MCNF_Objects_hw3.Leg("1", "4", 1, 1, 1),
 	MCNF_Objects_hw3.Leg("6", "5", 1, 1, 1),
@@ -187,5 +187,3 @@ minfleetsize = 0
 for myleg in legs:
 	if myleg.origin.__contains__("0") and myleg.destination != "7":
 		minfleetsize += myleg.arcFlow.varValue
-
-print "Minimun fleet size = " + str(minfleetsize)
